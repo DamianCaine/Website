@@ -1,7 +1,7 @@
 package com.excel.exceltosql.helper;
 
-import com.excel.exceltosql.entity.excelInfo;
 import com.excel.exceltosql.entity.excelInfo2;
+import com.excel.exceltosql.entity.excelInfo3;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -9,13 +9,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class myExcelHelper2 {
-
+public class myExcelHelper3 {
     public static boolean checkExcelFormat(MultipartFile file){
 
         String content=file.getContentType();
@@ -26,8 +24,8 @@ public class myExcelHelper2 {
             return false;
     }
 
-    public static List<excelInfo2> convertExcelToList(InputStream is){
-        List<excelInfo2> list=new ArrayList<>();
+    public static List<excelInfo3> convertExcelToList(InputStream is){
+        List<excelInfo3> list=new ArrayList<>();
 
         try{
 
@@ -45,30 +43,37 @@ public class myExcelHelper2 {
                 }
                 Iterator<Cell> cells=row.iterator();
                 int cid=0;
-                excelInfo2 di = new excelInfo2();
+                excelInfo3 di = new excelInfo3();
                 while(cells.hasNext()){
                     Cell cell=cells.next();
                     switch(cid){
                         case 0:
-                            di.setSrNo((int) cell.getNumericCellValue());
+                            di.setCustNo(cell.getStringCellValue());
                             break;
                         case 1:
-                            di.setCandidateNo(cell.getStringCellValue());
+                            di.setCustName(cell.getStringCellValue());
                             break;
                         case 2:
-                            di.setName(cell.getStringCellValue());
+                            di.setStreetAddress(cell.getStringCellValue());
                             break;
                         case 3:
-                            di.setBranch(cell.getStringCellValue());
+                            di.setCity(cell.getStringCellValue());
                             break;
                         case 4:
-                            di.setDate(cell.getStringCellValue());
+                            di.setState(cell.getStringCellValue());
                             break;
                         case 5:
-                            di.setTechRoom(cell.getStringCellValue());
+                            di.setZipCode(cell.getStringCellValue());
                             break;
                         case 6:
-                            di.setRegNo(cell.getStringCellValue());
+                            di.setCreditLimit(cell.getNumericCellValue());
+                            break;
+                        case 7:
+                            di.setTaxId(cell.getStringCellValue());
+                            break;
+                        case 8:
+                            di.setSalesRep(cell.getStringCellValue());
+                            break;
                         default:
                             break;
                     }
